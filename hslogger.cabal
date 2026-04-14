@@ -63,12 +63,14 @@ library
         System.Log.Handler
         System.Log.Formatter
         System.Log.Handler.Simple
-        System.Log.Handler.Syslog
-        System.Log.Handler.Growl
         System.Log.Handler.Log4jXML
         System.Log.Logger
     other-modules:
         UTF8
+    if !impl(ghcjs) && !arch(javascript)
+        exposed-modules:
+            System.Log.Handler.Growl
+            System.Log.Handler.Syslog
 
     default-language: Haskell2010
     other-extensions: CPP ExistentialQuantification DeriveDataTypeable
@@ -80,8 +82,13 @@ library
       , containers   >= 0.5.7.1   && < 1
       , deepseq      >= 1.4.2.0   && < 1.6
       , time         >= 1.6.0.1   && < 2
-      , network-bsd  >= 2.8.1     && <2.9
-      , network      >= 3.0       && <3.3
+    if !impl(ghcjs) && !arch(javascript)
+        build-depends:
+            network-bsd  >= 2.8.1     && <2.9
+          , network      >= 3.0       && <3.3
+    else
+        build-depends:
+            network-uri
 
     if !os(windows)
       Build-Depends: unix >= 2.7.2.0 && < 2.9
