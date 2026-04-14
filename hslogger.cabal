@@ -93,6 +93,8 @@ library
             Build-Depends: unix >= 2.7.2.0 && < 2.9
 
 test-suite runtests
+    if impl(ghcjs) || arch(javascript)
+        Buildable: False
     type: exitcode-stdio-1.0
 
     hs-source-dirs: testsrc
