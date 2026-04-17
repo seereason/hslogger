@@ -83,12 +83,11 @@ library
       , deepseq      >= 1.4.2.0   && < 1.6
       , time         >= 1.6.0.1   && < 2
       , network-uri  >= 2.6.4.2   && < 3
+      , unix         >= 2.7.2.0   && < 2.9
     if !impl(ghcjs) && !arch(javascript)
         build-depends:
             network-bsd  >= 2.8.1     && <2.9
           , network      >= 3.0       && <3.3
-    if !impl(ghcjs) && !arch(javascript) && !os(windows)
-        Build-Depends: unix >= 2.7.2.0 && < 2.9
 
 test-suite runtests
     if impl(ghcjs) || arch(javascript)
