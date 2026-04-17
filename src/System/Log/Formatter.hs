@@ -26,7 +26,7 @@ module System.Log.Formatter( LogFormatter
 import Data.List
 import Control.Applicative ((<$>))
 import Control.Concurrent (myThreadId)
-#if !defined(mingw32_HOST_OS) && !__GHCJS__
+#if !defined(mingw32_HOST_OS) && !__GHCJS__ && !defined(javascript_HOST_OS)
 import System.Posix.Process (getProcessID)
 #endif
 
@@ -88,7 +88,7 @@ varFormatter vars format _h (prio,msg) loggername = do
                                  ,("prio", return $ show prio)
                                  ,("loggername", return loggername)
                                  ,("tid", show <$> myThreadId)
-#if !defined(mingw32_HOST_OS) && !__GHCJS__
+#if !defined(mingw32_HOST_OS) && !__GHCJS__ && !defined(javascript_HOST_OS)
                                  ,("pid", show <$> getProcessID)
 #endif
                                  ]
